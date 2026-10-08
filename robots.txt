@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nespresso.paultinker.uk/sitemap.xml

@@ -1,0 +1,104 @@
+/* Nespresso theme on the shared case study template.
+   Type is ICONESSO (Display for headings, Text for everything else); the top bar keeps Paul's own fonts.
+   Colour comes from the hero: a brighter Nespresso purple, #7e3bb8 (6.55:1 on white, 5.4:1 on pink) and the soft pink of the docs. */
+@font-face { font-family: 'ICONESSO Text'; src: url('fonts/ICONESSOText-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'ICONESSO Text'; src: url('fonts/ICONESSOText-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'ICONESSO Text'; src: url('fonts/ICONESSOText-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'ICONESSO Display'; src: url('fonts/ICONESSODisplay-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'ICONESSO Display'; src: url('fonts/ICONESSODisplay-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+/* Anything in the shared template that still asks for Smart's Mulish or Lato gets ICONESSO. */
+@font-face { font-family: 'Mulish'; src: url('fonts/ICONESSODisplay-Regular.woff2') format('woff2'); font-weight: 300 900; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('fonts/ICONESSOText-Regular.woff2') format('woff2'); font-weight: 300 900; font-display: swap; }
+
+:root { --accent: #7e3bb8; --navy: #1d1d1d; --ink: #1d1d1d; --tint: #f5f2ef; --line: #e3e3e3; --pink: #f9e4e8; }
+body, p, li, figcaption, dt, dd, .button, .eyebrow, .stat span, .rebuild-note, .foot-links, .rollout-note {
+  font-family: 'ICONESSO Text', Arial, sans-serif; }
+h1, h2, h3, .role-label, .stat b {
+  font-family: 'ICONESSO Display', Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; color: var(--navy); }
+.intro h1 { letter-spacing: -0.025em; }
+.top .back, a { color: var(--accent); }
+.foot-links a { color: var(--accent); }
+
+.role-ds { background: var(--accent); color: #fff; }
+.role-ds .role-label { color: #fff; }
+.role-ds li { border-top-color: rgba(255,255,255,.22); }
+.role-ds li::before { background: #f4c5cd; }
+.role-pd { background: var(--tint); }
+.role-pd li::before { background: var(--accent); }
+.learned { background: var(--pink); }
+
+.rollout-note { margin: 22px 0 0; font-size: var(--fs-small); color: #595959; }
+
+/* Diagrams: the story drawn as text, so nothing unreleased is shown. */
+.diagram .diagram-in { background: var(--tint); border-radius: 16px; padding: clamp(24px, 4vw, 48px); }
+.diagram figcaption { margin-top: 12px; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 28px; counter-reset: f; }
+.flow li { position: relative; background: #fff; border-radius: 12px; padding: 18px 18px 20px; box-shadow: 0 0 0 1px var(--line); }
+.flow li b { display: block; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: 20px; line-height: 1.2; color: var(--navy); }
+.flow li span { display: block; margin-top: 6px; font-size: var(--fs-small); line-height: 1.4; color: #595959; }
+.flow li:not(:last-child)::after { content: ''; position: absolute; top: 50%; right: -22px; width: 14px; height: 14px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); transform: translateY(-50%) rotate(45deg); }
+@media (max-width: 820px) {
+  .flow { grid-auto-flow: row; gap: 26px; }
+  .flow li:not(:last-child)::after { top: auto; bottom: -20px; right: auto; left: 28px; transform: rotate(135deg); }
+}
+
+.compat { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; }
+.compat-col { background: #fff; border-radius: 12px; padding: 22px 24px; box-shadow: 0 0 0 1px var(--line); height: 100%; box-sizing: border-box; }
+.compat-head { margin: 0 0 10px; font-size: var(--fs-label); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.compat ul { margin: 0; padding: 0; list-style: none; }
+.compat li { padding: 9px 0; border-top: 1px solid var(--line); font-size: var(--fs-body); line-height: 1.35; }
+.compat li:first-child { border-top: 0; }
+.compat-mid span { display: grid; place-items: center; width: 116px; height: 116px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: 18px; text-align: center; line-height: 1.15; padding: 10px; box-sizing: border-box; }
+@media (max-width: 820px) { .compat { grid-template-columns: 1fr; } .compat-mid { justify-self: center; } .compat-mid span { width: 96px; height: 96px; font-size: 16px; } }
+
+.numbers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 24px; }
+.numbers li { border-top: 2px solid var(--navy); padding-top: 14px; }
+.numbers b { display: block; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: clamp(34px, 4vw, 48px); line-height: 1; color: var(--navy); }
+.numbers span { display: block; margin-top: 8px; font-size: var(--fs-small); line-height: 1.4; color: #595959; }
+@media (max-width: 600px) { .numbers { grid-template-columns: 1fr 1fr; } }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 20px; position: relative; }
+.timeline li { position: relative; padding: 30px 0 22px; border-top: 2px solid var(--navy); }
+.timeline li::before { content: ''; position: absolute; top: -8px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+.timeline time { display: block; font-size: var(--fs-label); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.timeline b { display: block; margin-top: 6px; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: 20px; line-height: 1.2; color: var(--navy); }
+.timeline span { display: block; margin-top: 4px; font-size: var(--fs-small); line-height: 1.4; color: #595959; }
+.timeline li:last-child::before { background: #fff; box-shadow: inset 0 0 0 3px var(--accent); }
+@media (max-width: 820px) { .timeline { grid-template-columns: 1fr 1fr; } }
+
+.principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.principles li { background: #fff; border-radius: 12px; padding: 22px 24px; box-shadow: 0 0 0 1px var(--line); }
+.principles b { display: block; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: 22px; line-height: 1.2; color: var(--navy); }
+.principles span { display: block; margin-top: 8px; font-size: var(--fs-body); line-height: 1.5; }
+@media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
+
+.next-list { list-style: none; margin: 28px 0 0; padding: 0; }
+.next-list li { padding: 16px 0; border-top: 1px solid var(--line); }
+.next-list b { display: block; font-family: 'ICONESSO Display', Arial, sans-serif; font-size: 20px; color: var(--navy); }
+.next-list span { display: block; margin-top: 4px; }
+/* The Team line runs on its own row at the body text width. */
+.meta .meta-team { flex-basis: 100%; max-width: calc((100% + 24px) * 10 / 12 - 24px); }
+@media (max-width: 760px) { .meta .meta-team { max-width: none; } }
+/* One summary box instead of two crafts: full width, bullets in two columns. */
+.roles.roles-one { grid-template-columns: 1fr; }
+.roles-one ul { columns: 2; column-gap: 40px; }
+.roles-one li { break-inside: avoid; }
+@media (max-width: 760px) { .roles-one ul { columns: 1; } }
+/* Flow arrows: a symmetric chevron centred exactly in the gap between boxes. */
+.flow li:not(:last-child)::after {
+  content: ''; position: absolute; top: 50%; right: auto; left: calc(100% + 14px); width: 18px; height: 18px; border: 0;
+  transform: translate(-50%, -50%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M6.5 3.5 12 9l-5.5 5.5' fill='none' stroke='%237e3bb8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@media (max-width: 820px) {
+  .flow li:not(:last-child)::after { top: calc(100% + 13px); left: 50%; transform: translate(-50%, -50%) rotate(90deg); }
+}
+/* Headings in ICONESSO Display Regular rather than Bold: lighter, closer to Nespresso's own pages. */
+h1, h2, h3, .role-label, .stat b, .flow li b, .compat-mid span, .numbers b, .timeline b, .principles b, .next-list b { font-weight: 400; }
+/* Supporting text in every diagram: one lighter grey (#666, AA on white and on the cream panel). */
+.flow li span, .numbers span, .timeline span, .principles span, .next-list span { color: #666; }
+/* The big "One problem" circle in the deep purple of the hero, so a large block of colour doesn't shout. */
+.compat-mid span { background: #4a2060; }
+/* The rollout note as a soft purple pill, so it's noticed without competing with the content. */
+.rollout-note { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 10px 16px; border-radius: 999px; background: #f3ecf9; color: var(--accent); font-weight: 500; }
+.rollout-note::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
