@@ -102,3 +102,170 @@ h1, h2, h3, .role-label, .stat b, .flow li b, .compat-mid span, .numbers b, .tim
 /* The rollout note as a soft purple pill, so it's noticed without competing with the content. */
 .rollout-note { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 10px 16px; border-radius: 999px; background: #f3ecf9; color: var(--accent); font-weight: 500; }
 .rollout-note::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* From the full case study: screenshots, phone bands and result headings */
+.shot { max-width: var(--wide); margin: 0 auto; padding: 0 var(--gutter); }
+.shot + .shot { margin-top: 28px; }
+.shot img { width: 100%; border-radius: 14px; box-shadow: 0 0 0 1px var(--line); }
+.shot figcaption, .phones figcaption.cap { margin-top: 12px; font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+.shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.phones { margin: 0; padding: 0; }
+.phones-in { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 7vw, 112px); padding: clamp(40px, 6vw, 88px) max(var(--gutter), calc((100% - 1120px) / 2)); background: var(--band, #e8edf3); }
+.phones-in img { width: 100%; border-radius: 6px; }
+.phones-in figure p { margin: 10px 0 0; font-size: 14px; text-align: center; color: var(--ink-soft); }
+.phones + .shot, .shot + .phones, .phones + .phones { margin-top: 28px; }
+.result-head { max-width: var(--wide); margin: clamp(56px, 7vw, 96px) auto 22px; padding: 0 var(--gutter); }
+.result-head h3 { margin: 0 0 8px; font-size: clamp(24px, 2.6vw, 32px); }
+.result-head p { margin: 0; max-width: 62ch; color: var(--ink-soft); }
+@media (max-width: 720px) {
+  .shot-pair { grid-template-columns: 1fr; }
+  .phones-in { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px; }
+  .phones-in figure { scroll-snap-align: center; }
+}
+/* screen recordings (full version) */
+.pvid { position: relative; }
+.pvid video { display: block; width: 100%; height: auto; background: #fff; }
+.pvid > video { border-radius: 14px; }
+.shot-narrow { max-width: calc(820px + 2 * var(--gutter)); }
+.pvid .video-toggle { display: block; margin: 10px 0 0 auto; padding: 4px 12px; border: 1px solid var(--line); border-radius: 99px; font: 500 13px/1.3 inherit; font-family: inherit; color: var(--ink-soft); background: transparent; cursor: pointer; }
+.pvid .video-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.phones-wide .phones-in { grid-template-columns: 1fr; }
+.text h3 { margin: 0 0 10px; font-size: clamp(22px, 2.4vw, 28px); }
+/* results carousels on deck-colour bands (full version) */
+.band { --space: clamp(36px, 5vw, 72px); --nav: 0px; --vt: 0px; position: relative; background: var(--band); padding: calc(var(--space) + var(--nav) + var(--vt)) 0 var(--space); }
+/* Keep the imagery vertically centred: the arrows and Pause pill below it get matching space above */
+.band:has(.band-nav) { --nav: calc(clamp(20px, 3vw, 32px) + 40px); }
+.band:has(.video-toggle) { --vt: 34px; }
+.band-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline-offset: -4px; }
+.band-track::-webkit-scrollbar { display: none; }
+.band-slide { flex: 0 0 100%; scroll-snap-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 max(var(--gutter), calc((100% - 1120px) / 2)); box-sizing: border-box; }
+.slide-frame { width: 100%; border-radius: 6px; overflow: hidden; }
+.slide-frame img, .slide-frame video { display: block; width: 100%; height: auto; }
+.slide-phones { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 7vw, 112px); }
+.slide-phones img { width: 100%; border-radius: 6px; }
+.band .video-toggle { align-self: flex-end; margin: 10px 0 0; padding: 4px 12px; border: 1px solid rgba(0,0,0,.18); border-radius: 99px; font: 500 13px/1.3 inherit; font-family: inherit; color: rgba(0,0,0,.7); background: transparent; cursor: pointer; }
+.band-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: clamp(20px, 3vw, 32px); font-size: 14px; color: rgba(0,0,0,.7); }
+.band-nav button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(0,0,0,.2); background: rgba(255,255,255,.5); color: inherit; font-size: 18px; cursor: pointer; }
+.band-nav button:disabled { opacity: .35; cursor: default; }
+.band-dark .band-nav, .band-dark .video-toggle { color: #fff; }
+.band-dark .band-nav button, .band-dark .video-toggle { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); }
+.result-head + .band { margin-top: 0; }
+@media (max-width: 700px) {
+  .band-slide-phone img { width: min(72vw, 300px); border-radius: 6px; }
+}
+.band-plain { background: none; padding: 0; }
+.band-plain .slide-frame { border-radius: 6px; }
+.band-plain .band-slide { padding: 0 max(var(--gutter), calc((100% - var(--wide)) / 2 + var(--gutter))); }
+/* Videos carry a 1px grey edge from the recording; nudge it under the rounded frame */
+.slide-frame video { transform: scale(1.006); }
+/* Moments band: no colour, just a grey keyline around the frame (Paul, 2026-10-28) */
+.band-keyline .slide-frame { position: relative; }
+.band-keyline .slide-frame::after { content: ''; position: absolute; inset: 0; border: 1px solid var(--line); border-radius: inherit; pointer-events: none; }
+.band-keyline .video-toggle { border-color: var(--line); color: var(--ink-soft); }
+/* Campaign banner runs edge to edge; phones crop it tighter around the cup (Paul, 2026-10-28) */
+.banner-full { margin: clamp(40px, 6vw, 72px) 0; }
+.banner-full img { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) { .banner-full img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 52% 50%; } }
+/* Core principles carousel: text beside an image, alternating sides (Paul, 2026-10-28) */
+.band-principles { margin-top: clamp(28px, 4vw, 48px); }
+.pslide { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 96px); align-items: center; }
+.pslide img { width: 100%; border-radius: 6px; display: block; }
+.pslide-flip img { order: -1; }
+.pslide-text h3 { margin: 0 0 16px; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.2; }
+.pslide-text p { margin: 0 0 14px; color: var(--ink-soft); }
+.pslide-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 18px; }
+.pslide-text .pslide-list li b { display: block; font-family: 'PT Lato', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 19px; color: var(--ink); margin-bottom: 4px; }
+.pslide-list span { color: var(--ink-soft); }
+@media (max-width: 700px) {
+  .pslide { grid-template-columns: 1fr; gap: 22px; align-items: start; }
+  .pslide-flip img { order: 0; }
+  .pslide img { order: -1; }
+}
+html body .pslide-list li b { font-family: var(--pt-head) !important; font-weight: 700 !important; }
+
+.tl-in { padding-top: clamp(48px, 6vw, 88px); padding-bottom: clamp(48px, 6vw, 88px); }
+/* Timeline: full-width band, milestones alternate above and below one axis (Paul's Figma, 2026-10-28) */
+.tl-band { background: #eef1f3; margin-top: clamp(28px, 4vw, 48px); overflow: hidden; }
+.tl { --lab: 92px; --stem: 96px; list-style: none; margin: 0 auto; padding: 0; width: max-content; display: grid; grid-template-columns: repeat(11, var(--col)) 176px; grid-template-rows: calc(var(--lab) + var(--stem)) calc(var(--lab) + var(--stem)); position: relative; color: #171717; }
+.tl::before { content: ''; position: absolute; left: -16px; right: 0; top: calc(var(--lab) + var(--stem)); height: 1px; background: #77797a; }
+.tl li { position: relative; grid-column: calc(var(--i) + 1) / span 2; }
+.tl li:last-child { grid-column: 12 / span 1; }
+.tl li:nth-child(odd) { grid-row: 1; }
+.tl li:nth-child(even) { grid-row: 2; padding-top: var(--stem); }
+.tl li::before { content: ''; position: absolute; left: 0; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: #171717; z-index: 1; }
+.tl li:nth-child(odd)::before { top: calc(var(--lab) + var(--stem) - 5px); }
+.tl li:nth-child(even)::before { top: -5px; }
+.tl li::after { content: ''; position: absolute; left: 0; border-left: 1.5px dashed #171717; }
+.tl li:nth-child(odd)::after { top: calc(var(--lab) + 14px); height: calc(var(--stem) - 22px); }
+.tl li:nth-child(even)::after { top: 10px; height: calc(var(--stem) - 24px); }
+/* each label keeps to its own two columns, wrapping rather than running into the next (Paul) */
+.tl li > * { display: block; max-width: calc(2 * var(--col) - 18px); }
+html body .tl time { font-family: var(--pt-head) !important; font-weight: 700 !important; font-size: 19px; line-height: 1.2; letter-spacing: .01em; }
+html body .tl b { font-family: var(--pt-head) !important; font-weight: 700 !important; font-size: 14px; line-height: 1.3; margin-top: 8px; }
+.tl span { font-size: 13px; line-height: 1.35; color: var(--ink-soft); margin-top: 2px; }
+/* Narrow screens scroll the timeline sideways (Paul) */
+.tl-in { overflow-x: auto; scrollbar-width: none; padding-left: max(var(--gutter), 16px); padding-right: var(--gutter); }
+.tl-in::-webkit-scrollbar { display: none; }
+@media (max-width: 1000px) { .tl-band { --col: 100px; } .tl-in { padding-left: var(--gutter); } }
+/* "The results" heading lines up with the result headings below (Paul, 2026-10-28) */
+#results > .text:first-child { max-width: var(--wide); }
+/* Timeline heading sits inside the band, lined up with the first milestone (Paul) */
+/* the timeline fills the page's wide column exactly, so it lines up with the headings and bands (Paul) */
+.tl-band { --col: clamp(78px, calc((min(100vw, var(--wide)) - 2 * var(--gutter) - 176px) / 11), 104px); }
+.tl-head { max-width: var(--wide); margin: 0 auto; box-sizing: border-box; padding: clamp(48px, 6vw, 88px) var(--gutter) 0; }
+.tl-head h3 { margin: 0 0 10px; font-size: clamp(22px, 2.4vw, 28px); }
+.tl-head p { margin: 0; max-width: 62ch; color: var(--ink-soft); }
+.tl-band .tl-in { padding-top: clamp(32px, 4vw, 56px); }
+
+
+/* carousel buttons: no white fill, a darker outline so the circle itself passes 3:1 on every band colour (the arrows
+   pass on their own), and the same drawn arrows as the other case studies (Paul 2026-10-28) */
+.band-nav { color: rgba(0,0,0,.8); }
+.band-nav button { display: inline-flex; align-items: center; justify-content: center; padding: 0; font-size: 0 !important; -webkit-appearance: none; appearance: none; background: transparent; border-color: rgba(0,0,0,.5); color: #1d1d1d; transition: border-color .2s ease, background-color .2s ease; }
+.band-nav button:hover:not(:disabled) { border-color: #1d1d1d; background: rgba(0,0,0,.06); }
+.band-nav button::before { content: ""; width: 18px; height: 18px; background: currentColor; }
+.band-prev::before { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12H4M11 5l-7 7 7 7'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12H4M11 5l-7 7 7 7'/%3E%3C/svg%3E") center / contain no-repeat; }
+.band-next::before { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16M13 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16M13 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat; }
+.band-dark .band-nav { color: #fff; }
+.band-dark .band-nav button { background: transparent; border-color: rgba(255,255,255,.7); color: #fff; }
+.band-dark .band-nav button:hover:not(:disabled) { border-color: #fff; background: rgba(255,255,255,.12); }
+
+/* Discovering numbers (Paul 2026-10-28: "does this need to be so big?"): no tinted card, the text column's width,
+   regular-weight numbers at about half the stats' size, with a thin rule under each like the stats */
+.diagram-numbers { max-width: 820px !important; padding-left: var(--gutter) !important; padding-right: var(--gutter) !important; box-sizing: border-box; }
+.diagram-numbers .diagram-in { background: none; border-radius: 0; padding: 0; }
+.diagram-numbers .numbers { gap: 24px 32px; }
+.diagram-numbers .numbers li { border-top: 0; border-bottom: 1px solid var(--line, #dcdcdc); padding: 0 0 14px; }
+html body .diagram-numbers .numbers b:not(#x) { font-family: var(--pt-head) !important; font-weight: 400 !important; font-size: clamp(28px, 3vw, 36px); color: var(--ink); }
+html body .diagram-numbers .numbers b small:not(#x) { font-size: .55em; margin-left: .04em; }
+.diagram-numbers .numbers span { margin-top: 6px; }
+/* Discovering numbers, tighter again (Paul 2026-10-28) */
+.diagram-numbers .numbers { gap: 14px 32px; }
+.diagram-numbers .numbers li { padding-bottom: 10px; }
+html body .diagram-numbers .numbers b:not(#x) { font-size: clamp(22px, 2.2vw, 28px); }
+.diagram-numbers .numbers span { margin-top: 2px; font-size: 14px; line-height: 1.35; }
+
+/* First steps: the site map and the first wireframes side by side, same 6px corners and keyline as the other images (Paul 2026-10-28) */
+.steps-pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 24px); }
+.steps-pair img { display: block; width: 100%; height: auto; aspect-ratio: 1905 / 1226; object-fit: cover; border-radius: 6px !important; box-shadow: none; }
+@media (max-width: 700px) { .steps-pair { grid-template-columns: 1fr; } }
+/* Pause / play as an icon button, matching Smart and Vodafone (Paul 2026-10-29) */
+.band:has(.video-toggle) { --vt: 46px; }
+.band .video-toggle, .pvid .video-toggle { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 1px solid #c9ced4; background: #fff; color: #1d1d1d; font-size: 0; }
+.pvid .video-toggle { margin: 10px 0 0 auto; }
+.band .video-toggle:hover, .pvid .video-toggle:hover { background: #f2f2f2; }
+.band .video-toggle svg, .pvid .video-toggle svg { width: 14px; height: 14px; }
+.band-keyline .video-toggle { border-color: #c9ced4; color: #1d1d1d; }
+.band-dark .video-toggle { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); color: #fff; }
+.band-dark .video-toggle:hover { background: rgba(255,255,255,.18); }
+/* no white fill, just the outline, at 3:1 like the carousel arrows (Paul 2026-10-29) */
+.band .video-toggle, .pvid .video-toggle, .band-keyline .video-toggle { background: transparent; border-color: rgba(0,0,0,.5); }
+.band .video-toggle:hover, .pvid .video-toggle:hover { background: rgba(0,0,0,.06); }
+.band-dark .video-toggle { background: transparent; border-color: rgba(255,255,255,.6); }
+.band-dark .video-toggle:hover { background: rgba(255,255,255,.12); }
+/* Overview image above "Built together" (Paul 2026-10-29): same corners and keyline as the steps pair */
+.built-hero { margin-bottom: clamp(32px, 4vw, 56px); }
+.built-hero img { display: block; width: 100%; height: auto; border-radius: 6px !important; box-shadow: 0 0 0 1px var(--line); }
+/* full width (Paul): edge to edge, so no corners or keyline */
+.built-hero img { border-radius: 0 !important; box-shadow: none; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
